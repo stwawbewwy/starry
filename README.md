@@ -22,7 +22,7 @@ Here is my setup:
 - **Editor:** [neovim](https://github.com/neovim/neovim)  
 - **Compositor:** [picom](https://github.com/yshui/picom)  
 - **Application Launcher:** [rofi](https://github.com/davatorium/rofi)  
-- **Music Player:** [ranger](https://github.com/ranger/ranger)
+- **File Manager:** [ranger](https://github.com/ranger/ranger)
 
 AwesomeWM modules used:
 - **[lain](https://github.com/lcpz/lain)**
