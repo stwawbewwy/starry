@@ -1,12 +1,14 @@
 local _M = {}
 
 local awful = require'awful'
+local lain = require'lain'
 local l = awful.layout.suit
+local j = lain.layout
 
 _M.layouts = {
-   awful.layout.suit.tile,
-   awful.layout.suit.floating,
-   awful.layout.suit.max,
+   l.tile,
+   l.floating,
+   j.centerwork
 }
 
 _M.tags = {
@@ -21,7 +23,7 @@ _M.tags = {
 _M.defaultlayouts = {
     l.tile,
     l.floating,
-    l.tile,
+    j.centerwork,
     l.floating,
     l.floating,
     l.floating

@@ -92,6 +92,7 @@ local batupd = lain.widget.bat{
 
         battext:set_text(bat_now.perc .. '%')
         batbar:set_value(bat_now.perc)
+        collectgarbage()
     end
 }
 
@@ -123,6 +124,7 @@ local volume = lain.widget.alsa{
     settings = function()
         volumetext:set_text(volume_now.level .. '%')
         volumebar:set_value(volume_now.level)
+        collectgarbage()
     end
 }
 
@@ -221,8 +223,13 @@ changecolor(logoutbutton, logoutbuttonsvg)
 changecolor(rebootbutton, rebootbuttonsvg)
 
 powermenu(powerbutton, 'systemctl poweroff')
-powermenu(logoutbutton, 'systemctl logout')
 powermenu(rebootbutton, 'systemctl reboot')
+
+logoutbutton:connect_signal('button::press', function(_, _, _, button)
+    if button == 1 then
+        awesome.quit()
+    end
+end)
 
 -- popup setup
 

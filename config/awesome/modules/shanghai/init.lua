@@ -19,24 +19,31 @@ local baticon = wibox.widget{
     valign = 'center',
 }
 
+local function checkimage(image)
+    if baticon.image ~= image then
+        baticon:set_image(image)
+    end
+end
+
 local batupd = lain.widget.bat{
     timeout = 10,
     settings = function()
         if (not bat_now.status) or bat_now.status == "N/A" or type(bat_now.perc) ~= "number" then return end
 
         if bat_now.perc >= 100 then
-            baticon:set_image(fivecake)
+            checkimage(fivecake)
         elseif bat_now.perc >= 80 then
-            baticon:set_image(fourcake)
+            checkimage(fourcake)
         elseif bat_now.perc >= 60 then
-            baticon:set_image(threecake)
+            checkimage(threecake)
         elseif bat_now.perc >= 40 then
-            baticon:set_image(twocake)
+            checkimage(twocake)
         elseif bat_now.perc >= 20 then
-            baticon:set_image(onecake)
+            checkimage(onecake)
         else
             baticon:set_image()
         end
+        collectgarbage()
     end
 }
 

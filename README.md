@@ -1,6 +1,6 @@
 <h1 align='center'>Cafe de Starry</h1>
 
-A mysterious that appears only on starry nights. When you smell the sweet scent, take a sip and have a deep dream. In a world of countless twinkling stars, sip a cup of fantasy-colored tea.
+A mysterious cafe that appears only on starry nights. When you smell the sweet scent, take a sip and have a deep dream. In a world of countless twinkling stars, sip a cup of fantasy-colored tea.
 
 Welcome to Cafe de Starry.
 
