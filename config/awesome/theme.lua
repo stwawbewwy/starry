@@ -90,6 +90,9 @@ theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 theme.layout_centerwork = lain_icons .. 'centerwork.png'
 theme.layout_termfair = lain_icons .. 'termfair.png'
+theme.layout_cascade = lain_icons .. 'cascade.png'
+theme.layout_cascadetile = lain_icons .. 'cascadetile.png'
+theme.layout_centerfair = lain_icons .. 'centerfair.png'
 
 theme.awesome_icon = theme_assets.awesome_icon(
 theme.menu_height, theme.bg_focus, theme.fg_focus

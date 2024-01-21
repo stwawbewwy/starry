@@ -8,7 +8,7 @@ local j = lain.layout
 _M.layouts = {
    l.tile,
    l.floating,
-   j.centerwork
+   j.cascade
 }
 
 _M.tags = {
@@ -23,7 +23,7 @@ _M.tags = {
 _M.defaultlayouts = {
     l.tile,
     l.floating,
-    j.centerwork,
+    j.cascade,
     l.floating,
     l.floating,
     l.floating

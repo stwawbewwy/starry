@@ -81,6 +81,20 @@ awful.keyboard.append_global_keybindings{
         group       = 'launcher',
         on_press    = function() awful.spawn('rofi -show window') end,
     },
+    awful.key{
+        modifiers   = {},
+        key         = 'XF86MonBrightnessDown',
+        description = 'decrease brightness',
+        group       = 'brightness control',
+        on_press    = function() awful.spawn('brightnessctl set 10%-') end,
+    },
+    awful.key{
+        modifiers   = {},
+        key         = 'XF86MonBrightnessUp',
+        description = 'increase brightness',
+        group       = 'brightness control',
+        on_press    = function() awful.spawn('brightnessctl set +10%') end,
+    }
 }
 
 -- tags related keybindings

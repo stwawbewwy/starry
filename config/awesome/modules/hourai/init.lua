@@ -5,8 +5,10 @@ local gears = require'gears'
 local apps = require'config.apps'
 local home = apps.home
 
-local sleeping = home .. 'modules/hourai/sleeping.png'
-local awake = home .. 'modules/hourai/awake.png'
+local sleeping1 = home .. 'modules/hourai/sleeping1.png'
+local sleeping2 = home .. 'modules/hourai/sleeping2.png'
+local awake1 = home .. 'modules/hourai/awake1.png'
+local awake2 = home .. 'modules/hourai/awake2.png'
 
 local eepy = wibox.widget{
     widget = wibox.widget.imagebox,
@@ -15,27 +17,33 @@ local eepy = wibox.widget{
     valign = 'center',
 }
 
-gears.timer{
+local function modecheck()
+    local currenttime = tonumber(os.date("%H"))
+    if currenttime >= 22 or currenttime <= 5 then
+        return true
+    else
+        return false
+    end
+end
+
+local timer = gears.timer{
     timeout = 60,
     call_now = true,
     autostart = true,
     callback = function()
-        local currenttime = tonumber(os.date("%H"))
-        if currenttime >= 22 or currenttime <= 5 then
-            if eepy.image ~= sleeping then
-                eepy:set_image(sleeping)
+        if modecheck() == true then
+            if eepy.image ~= sleeping2 then
+                eepy:set_image(sleeping2)
                 eepy:connect_signal('mouse::enter', function()
-                    eepy:set_image(awake)
+                    eepy:set_image(awake1)
                     eepy:connect_signal('mouse::leave', function()
-                        eepy:set_image(sleeping)
+                        eepy:set_image(sleeping2)
                     end)
                 end)
-            else
             end
         else
-            if eepy.image ~= awake then
-                eepy:set_image(awake)
-            else
+            if eepy.image ~= awake1 then
+                eepy:set_image(awake1)
             end
         end
         collectgarbage()

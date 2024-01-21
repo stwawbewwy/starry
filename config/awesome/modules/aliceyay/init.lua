@@ -2,6 +2,7 @@
 -- sparkles
 -- battery
 -- volume
+-- music player
 -- power menu
 -- popup setup
 
@@ -34,7 +35,7 @@ local popup = wibox{
     border_width = 2,
     border_color = beautiful.bg_focus,
     width = 200,
-    height = 500,
+    height = 600,
     ontop = true,
     shape = function(cr, width, height)
         gears.shape.rounded_rect(cr,width, height, 8)
@@ -92,7 +93,6 @@ local batupd = lain.widget.bat{
 
         battext:set_text(bat_now.perc .. '%')
         batbar:set_value(bat_now.perc)
-        collectgarbage()
     end
 }
 
@@ -124,7 +124,6 @@ local volume = lain.widget.alsa{
     settings = function()
         volumetext:set_text(volume_now.level .. '%')
         volumebar:set_value(volume_now.level)
-        collectgarbage()
     end
 }
 
@@ -163,6 +162,47 @@ awful.keyboard.append_global_keybindings{
         os.execute(string.format('amixer set %s toggle', volume.togglechannel or volume.channel))
         volume.update()
     end)
+}
+
+-- music player
+local playing = home .. 'modules/aliceyay/playing.png'
+local notplaying = home .. 'modules/aliceyay/not_playing.png'
+
+local musicplayer = wibox.widget{
+    widget = wibox.widget.imagebox,
+    forced_height = 64,
+    forced_width = 64,
+    valign = 'center',
+    halign = 'center',
+}
+
+local musictext = wibox.widget{
+    widget = wibox.widget.textbox,
+    halign = 'center',
+}
+
+local musictimer = gears.timer{
+    timeout = 1,
+    call_now = true,
+    autostart = true,
+    callback = function()
+        awful.spawn.with_line_callback('playerctl --player=cmus status', {
+            stdout = function(line)
+                if line == 'Stopped' or line == 'Paused' then
+                    musicplayer:set_image(notplaying)
+                    musictext:set_text(line)
+                else
+                    musicplayer:set_image(playing)
+                    musictext:set_text(line)
+                end
+            end,
+            stderr = function()
+                musicplayer:set_image(notplaying)
+                musictext:set_text('No music')
+            end
+        })
+        collectgarbage()
+    end
 }
 
 -- power menu
@@ -259,6 +299,12 @@ popup:setup{
             volumebar,
             spacing = 10,
             layout = wibox.layout.fixed.vertical,
+        },
+        {
+            musicplayer,
+            musictext,
+            spacing = 10,
+            layout = wibox.layout.align.vertical,
         },
         {
             powerbutton,

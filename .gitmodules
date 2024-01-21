@@ -1,0 +1,4 @@
+[submodule "config/awesome/lain"]
+    path = config/awesome/lain
+    url = https://github.com/lcpz/lain.git
+
