@@ -37,4 +37,6 @@ The cutes of this rice:
 - Bell
     - Shows a ringing sprite when hovered over it
     - Opens popup panel
+- Turntable music widget
+    - Music indicator
 - Custom taglist icons
