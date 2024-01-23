@@ -21,7 +21,7 @@ Here is my setup:
 - **Shell:** [bash](https://www.gnu.org/software/bash)  
 - **Editor:** [neovim](https://github.com/neovim/neovim)  
 - **Compositor:** [picom](https://github.com/yshui/picom)  
-- **Application Launcher:** [rofi](https://github.com/davatorium/rofi)  
+- **Application Launcher:** bling application launcher module  
 - **File Manager:** [ranger](https://github.com/ranger/ranger)
 
 AwesomeWM modules used:
