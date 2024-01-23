@@ -17,7 +17,7 @@ So just take a seat, and enjoy your time reading through my config files! Owie w
 Here is my setup:
 - **OS:** [Arch Linux](https://archlinux.org)  
 - **WM:** [awesome](https://github.com/awesomeWM/awesome)  
-- **Terminal:** [kitty](https://sw.kovidgoyal.net/kitty)  
+- **Terminal:** [wezterm](https://github.com/wez/wezterm.git)  
 - **Shell:** [bash](https://www.gnu.org/software/bash)  
 - **Editor:** [neovim](https://github.com/neovim/neovim)  
 - **Compositor:** [picom](https://github.com/yshui/picom)  
