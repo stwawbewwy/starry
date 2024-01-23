@@ -68,20 +68,6 @@ awful.keyboard.append_global_keybindings{
         on_press    = function() awful.spawn('flameshot full') end,
     },
     awful.key{
-        modifiers   = {mod.super},
-        key         = 'p',
-        description = 'application launcher',
-        group       = 'launcher',
-        on_press    = function() awful.spawn('rofi -show drun') end,
-    },
-    awful.key{
-        modifiers   = {mod.super, mod.shift},
-        key         = 'p',
-        description = 'show all windows',
-        group       = 'launcher',
-        on_press    = function() awful.spawn('rofi -show window') end,
-    },
-    awful.key{
         modifiers   = {},
         key         = 'XF86MonBrightnessDown',
         description = 'decrease brightness',

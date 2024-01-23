@@ -4,6 +4,7 @@ local gears = require'gears'
 local bling = require'bling'
 local beautiful = require'beautiful'
 
+local mod = require'bindings.mod'
 local apps = require'config.apps'
 local home = apps.home
 
@@ -96,6 +97,16 @@ local args = {
 }
 
 local app_launcher = bling.widget.app_launcher(args)
+
+awful.keyboard.append_global_keybindings{
+    awful.key{
+        modifiers = {mod.super},
+        key = 'p',
+        description = 'application launcher',
+        group = 'launcher',
+        on_press = function() app_launcher:toggle() end,
+    }
+}
 
 eepy:connect_signal('button::press', function(_, _, _, button)
     if button == 3 then
