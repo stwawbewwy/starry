@@ -57,7 +57,7 @@ ruled.client.connect_signal('request::rules', function()
        rule_any = {
            class = {'PrismLauncher', 'steam'}
        },
-       properties = {screen = 1, tag =vars.tags[6]}
+       properties = {screen = 1, tag = vars.tags[6]}
    }
 
    -- Add titlebars to normal clients and dialogs

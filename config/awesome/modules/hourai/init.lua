@@ -1,6 +1,8 @@
 local awful = require'awful'
 local wibox = require'wibox'
 local gears = require'gears'
+local bling = require'bling'
+local beautiful = require'beautiful'
 
 local apps = require'config.apps'
 local home = apps.home
@@ -49,5 +51,59 @@ local timer = gears.timer{
         collectgarbage()
     end
 }
+
+local term_scratch = bling.module.scratchpad{
+    command = "wezterm start --class spad",
+    rule = {instance = "spad"},
+    sticky = true,
+    autoclose = true,
+    floating = true,
+    geometry = {x=620, y=52, height = 720, width=1280},
+    reapply = true,
+    dont_focus_before_close = false,
+}
+
+local args = {
+    terminal = 'wezterm',
+    favorites = {'librewolf', 'wezterm'},
+    skip_empty_icons = true,
+    placement = awful.placement.right,
+    apps_per_row = 5,
+    apps_per_column = 2,
+
+    background = beautiful.bg_normal,
+    border_width = 0,
+    shape = function(cr, width, height)
+        gears.shape.rounded_rect(cr, width, height)
+    end,
+    prompt_color = beautiful.bg_focus,
+    prompt_icon = '',
+    prompt_text = 'Bon voyage! ',
+    prompt_text_color = beautiful.fg_focus,
+    prompt_cursor_color = beautiful.fg_normal,
+
+    expand_apps = true,
+    app_shape = function(cr, widget, height)
+        gears.shape.rounded_rect(cr, widget, height)
+    end,
+    app_normal_color = beautiful.bg_normal,
+    app_normal_hover_color = beautiful.bg_focus,
+    app_selected_color = beautiful.bg_focus,
+    app_selected_hover_color = beautiful.bg_focus,
+    app_name_normal_color = beautiful.fg_normal,
+    app_name_selected_color = beautiful.fg_focus,
+    expand_apps = false,
+}
+
+local app_launcher = bling.widget.app_launcher(args)
+
+eepy:connect_signal('button::press', function(_, _, _, button)
+    if button == 3 then
+        term_scratch:toggle()
+    elseif button == 1 then
+        app_launcher:toggle()
+    else
+    end
+end)
 
 return eepy

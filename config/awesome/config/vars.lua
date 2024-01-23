@@ -2,13 +2,14 @@ local _M = {}
 
 local awful = require'awful'
 local lain = require'lain'
+local bling = require'bling'
 local l = awful.layout.suit
-local j = lain.layout
+local b = bling.layout
 
 _M.layouts = {
-   l.tile,
-   l.floating,
-   j.cascade
+    l.tile,
+    l.floating,
+    b.equalarea
 }
 
 _M.tags = {
@@ -21,9 +22,9 @@ _M.tags = {
 }
 
 _M.defaultlayouts = {
-    l.tile,
+    b.equalarea,
     l.floating,
-    j.cascade,
+    l.tile,
     l.floating,
     l.floating,
     l.floating
