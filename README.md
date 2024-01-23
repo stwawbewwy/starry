@@ -26,6 +26,7 @@ Here is my setup:
 
 AwesomeWM modules used:
 - **[lain](https://github.com/lcpz/lain)**
+- **[bling](https://github.com/BlingCorp/bling.git)**
 
 The cutes of this rice:
 - Cat
@@ -40,3 +41,7 @@ The cutes of this rice:
 - Turntable music widget
     - Music indicator
 - Custom taglist icons
+
+External dependencies:
+- **[playerctl](https://github.com/altdesktop/playerctl.git)**
+- **[brightnessctl](https://github.com/Hummer12007/brightnessctl.git)**
