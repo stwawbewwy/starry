@@ -61,7 +61,7 @@ local term_scratch = bling.module.scratchpad{
     floating = true,
     geometry = {x=620, y=52, height = 720, width=1280},
     reapply = true,
-    dont_focus_before_close = false,
+    dont_focus_before_close = true,
 }
 
 local args = {
@@ -69,8 +69,11 @@ local args = {
     favorites = {'librewolf', 'wezterm'},
     skip_empty_icons = true,
     placement = awful.placement.right,
+
     apps_per_row = 5,
     apps_per_column = 2,
+    apps_margin = {left = 10, right = 10, top = 10, bottom = 10},
+    apps_spacing = 10,
 
     background = beautiful.bg_normal,
     border_width = 0,
@@ -83,10 +86,11 @@ local args = {
     prompt_text_color = beautiful.fg_focus,
     prompt_cursor_color = beautiful.fg_normal,
 
-    expand_apps = true,
     app_shape = function(cr, widget, height)
         gears.shape.rounded_rect(cr, widget, height)
     end,
+    app_width = 150,
+    app_height = 150,
     app_normal_color = beautiful.bg_normal,
     app_normal_hover_color = beautiful.bg_focus,
     app_selected_color = beautiful.bg_focus,

@@ -12,6 +12,7 @@ local wibox = require'wibox'
 local gears = require'gears'
 local lain = require'lain'
 local beautiful = require'beautiful'
+local naughty = require'naughty'
 
 local apps = require'config.apps'
 local home = apps.home
@@ -192,26 +193,30 @@ local function brightnessupdate()
         stdout = function(line)
             brightnessbar:set_value(tonumber(line))
             brightnesstext:set_text(math.floor(tonumber(line)/255*100) .. '%')
+            naughty.notify({title = 'Brightness', text = brightnesstext.text})
         end
     })
 end
 
 local brightness = gears.timer{
-    timeout = 30,
+    timeout = 60,
     call_now = true,
     autostart = true,
     callback = function()
-        brightnessupdate()
+        awful.spawn.with_line_callback('brightnessctl g', {
+            stdout = function(line)
+                brightnessbar:set_value(tonumber(line))
+                brightnesstext:set_text(math.floor(tonumber(line)/255*100) .. '%')
+            end
+        })
     end
 }
 
 awful.keyboard.append_global_keybindings{
     awful.key({}, 'XF86MonBrightnessDown', function()
-        awful.spawn('brightnessctl set 50-')
         brightnessupdate()
     end),
     awful.key({}, 'XF86MonBrightnessUp', function()
-        awful.spawn('brightnessctl set +50')
         brightnessupdate()
     end)
 }
