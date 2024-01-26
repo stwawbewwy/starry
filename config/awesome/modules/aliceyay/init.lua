@@ -13,6 +13,7 @@ local gears = require'gears'
 local lain = require'lain'
 local beautiful = require'beautiful'
 local naughty = require'naughty'
+local mod = require'bindings.mod'
 
 local apps = require'config.apps'
 local home = apps.home
@@ -440,5 +441,15 @@ button:connect_signal('button::press', function(_, _, _, button)
         toggle(popup)
     end
 end)
+
+awful.keyboard.append_global_keybindings{
+    awful.key{
+        modifiers = {mod.super},
+        key = 'o',
+        descripton = 'popup menu',
+        group = 'popup',
+        on_press = function() toggle(popup) end,
+    },
+}
 
 return button

@@ -109,7 +109,14 @@ awful.keyboard.append_global_keybindings{
         description = 'application launcher',
         group = 'launcher',
         on_press = function() app_launcher:toggle() end,
-    }
+    },
+    awful.key{
+        modifiers = {mod.super, mod.shift},
+        key = 'p',
+        description = 'scratchpad',
+        group = 'launcher',
+        on_press = function() term_scratch:toggle() end,
+    },
 }
 
 eepy:connect_signal('button::press', function(_, _, _, button)
