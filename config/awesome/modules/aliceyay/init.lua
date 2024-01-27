@@ -38,7 +38,7 @@ local popup = wibox{
     border_width = 2,
     border_color = beautiful.bg_focus,
     width = 200,
-    height = 700,
+    height = 800,
     ontop = true,
     shape = function(cr, width, height)
         gears.shape.rounded_rect(cr,width, height, 8)
