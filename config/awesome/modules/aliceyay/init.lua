@@ -130,25 +130,25 @@ local volume = lain.widget.alsa{
 }
 
 volumebar:buttons(awful.util.table.join(
-    awful.button({}, 1, function() -- left click
-        awful.spawn(string.format("%s -e alsamixer", terminal))
-    end),
-    awful.button({}, 2, function() -- middle click
-        os.execute(string.format("%s set %s 100%%", volume.cmd, volume.channel))
-        volume.update()
-    end),
-    awful.button({}, 3, function() -- right click
-        os.execute(string.format("%s set %s toggle", volume.cmd, volume.togglechannel or volume.channel))
-        volume.update()
-    end),
-    awful.button({}, 4, function() -- scroll up
-        os.execute(string.format("%s set %s 1%%+", volume.cmd, volume.channel))
-        volume.update()
-    end),
-    awful.button({}, 5, function() -- scroll down
-        os.execute(string.format("%s set %s 1%%-", volume.cmd, volume.channel))
-        volume.update()
-    end)
+awful.button({}, 1, function() -- left click
+    awful.spawn(string.format("%s -e alsamixer", terminal))
+end),
+awful.button({}, 2, function() -- middle click
+    os.execute(string.format("%s set %s 100%%", volume.cmd, volume.channel))
+    volume.update()
+end),
+awful.button({}, 3, function() -- right click
+    os.execute(string.format("%s set %s toggle", volume.cmd, volume.togglechannel or volume.channel))
+    volume.update()
+end),
+awful.button({}, 4, function() -- scroll up
+    os.execute(string.format("%s set %s 1%%+", volume.cmd, volume.channel))
+    volume.update()
+end),
+awful.button({}, 5, function() -- scroll down
+    os.execute(string.format("%s set %s 1%%-", volume.cmd, volume.channel))
+    volume.update()
+end)
 ))
 
 awful.keyboard.append_global_keybindings{
@@ -214,9 +214,11 @@ local brightness = gears.timer{
 
 awful.keyboard.append_global_keybindings{
     awful.key({}, 'XF86MonBrightnessDown', function()
+        awful.spawn('brightnessctl set 51-')
         brightnessupdate()
     end),
     awful.key({}, 'XF86MonBrightnessUp', function()
+        awful.spawn('brightnessctl set 51+')
         brightnessupdate()
     end)
 }

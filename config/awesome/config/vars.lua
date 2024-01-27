@@ -7,9 +7,9 @@ local l = awful.layout.suit
 local b = bling.layout
 
 _M.layouts = {
-    l.tile,
+    l.spiral,
     l.floating,
-    b.equalarea
+    l.max,
 }
 
 _M.tags = {
@@ -22,12 +22,12 @@ _M.tags = {
 }
 
 _M.defaultlayouts = {
-    b.equalarea,
-    l.floating,
-    l.tile,
-    l.floating,
-    l.floating,
-    l.floating
+    l.spiral, -- 1
+    l.max, -- 2
+    l.spiral, -- 3
+    l.floating, -- 4
+    l.floating, -- 5
+    l.floating, -- 6
 }
 
 return _M
