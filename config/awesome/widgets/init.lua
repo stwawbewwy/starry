@@ -170,7 +170,6 @@ function _M.create_wibox(s)
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = 10,
-                -- modules.test,
                 textclock,
                 modules.hourai,
                 modules.shanghai,

@@ -73,6 +73,11 @@ local battext = wibox.widget{
     halign = 'center',
 }
 
+local batstat = wibox.widget{
+    widget = wibox.widget.textbox,
+    halign = 'center',
+}
+
 local batbar = wibox.widget{
     widget = wibox.widget.progressbar,
     max_value = 100,
@@ -83,19 +88,19 @@ local batbar = wibox.widget{
     background_color = beautiful.bg_focus,
 }
 
-local cutetext = wibox.widget{
-    widget = wibox.widget.textbox,
-    halign = 'center',
-    text = 'battery',
-}
-
 local batupd = lain.widget.bat{
     timeout = 10,
     settings = function()
         if (not bat_now.status) or bat_now.status == "N/A" or type(bat_now.perc) ~= "number" then return end
 
-        battext:set_text(bat_now.perc .. '%')
+        if bat_now.status == "Discharging" then
+            battext:set_text('Battery: ' .. bat_now.perc .. '%')
+        elseif bat_now.status == "Charging" then
+            battext:set_text('Battery: ' .. bat_now.perc .. '%')
+        else
+        end
         batbar:set_value(bat_now.perc)
+        batstat:set_text(bat_now.status)
     end
 }
 
@@ -104,12 +109,6 @@ local batupd = lain.widget.bat{
 local volumetext = wibox.widget{
     widget = wibox.widget.textbox,
     halign = 'center'
-}
-
-local cutetext1 = wibox.widget{
-    widget = wibox.widget.textbox,
-    halign = 'center',
-    text = 'volume',
 }
 
 local volumebar = wibox.widget{
@@ -125,7 +124,7 @@ local volumebar = wibox.widget{
 local volume = lain.widget.alsa{
     timeout = 1,
     settings = function()
-        volumetext:set_text(volume_now.level .. '%')
+        volumetext:set_text('Volume: ' .. volume_now.level .. '%')
         volumebar:set_value(volume_now.level)
     end
 }
@@ -168,7 +167,7 @@ awful.keyboard.append_global_keybindings{
 }
 
 -- brightness
-local cutetext2 = wibox.widget{
+local cutetext = wibox.widget{
     widget = wibox.widget.textbox,
     halign = 'center',
     text = 'brightness',
@@ -193,7 +192,7 @@ local function brightnessupdate()
     awful.spawn.with_line_callback('brightnessctl g', {
         stdout = function(line)
             brightnessbar:set_value(tonumber(line))
-            brightnesstext:set_text(math.floor(tonumber(line)/255*100) .. '%')
+            brightnesstext:set_text('Brightness: ' .. math.floor(tonumber(line)/255*100) .. '%')
             naughty.notify({title = 'Brightness', text = brightnesstext.text})
         end
     })
@@ -207,7 +206,7 @@ local brightness = gears.timer{
         awful.spawn.with_line_callback('brightnessctl g', {
             stdout = function(line)
                 brightnessbar:set_value(tonumber(line))
-                brightnesstext:set_text(math.floor(tonumber(line)/255*100) .. '%')
+                brightnesstext:set_text('Brightness: ' .. math.floor(tonumber(line)/255*100) .. '%')
             end
         })
     end
@@ -366,8 +365,12 @@ popup:setup{
         {
             {
                 sparkles,
-                cutetext,
-                battext,
+                {
+                    battext,
+                    batstat,
+                    spacing = 10,
+                    layout = wibox.layout.fixed.vertical,
+                },
                 spacing = 10,
                 layout = wibox.layout.fixed.horizontal,
             },
@@ -378,7 +381,6 @@ popup:setup{
         {
             {
                 sparkles,
-                cutetext1,
                 volumetext,
                 spacing = 10,
                 layout = wibox.layout.fixed.horizontal,
@@ -390,7 +392,6 @@ popup:setup{
         {
             {
                 sparkles,
-                cutetext2,
                 brightnesstext,
                 spacing = 10,
                 layout = wibox.layout.fixed.horizontal,
