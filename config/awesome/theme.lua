@@ -33,8 +33,8 @@ theme.taglist_squares_resize = "true"
 
 theme.useless_gap         = dpi(10)
 theme.border_width        = dpi(1)
-theme.border_color_normal = "#e9f1f4"
-theme.border_color_active = "#584b3a"
+theme.border_color_normal = "#0f4aa8"
+theme.border_color_active = "#a9e0fe"
 theme.border_color_marked = "#91231c"
 
 notification_border_color = "#875682"

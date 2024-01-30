@@ -22,10 +22,10 @@ _M.tags = {
 }
 
 _M.defaultlayouts = {
-    l.spiral, -- 1
+    l.max, -- 1
     l.max, -- 2
     l.spiral, -- 3
-    l.floating, -- 4
+    l.spiral, -- 4
     l.floating, -- 5
     l.floating, -- 6
 }

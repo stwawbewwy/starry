@@ -93,12 +93,7 @@ local batupd = lain.widget.bat{
     settings = function()
         if (not bat_now.status) or bat_now.status == "N/A" or type(bat_now.perc) ~= "number" then return end
 
-        if bat_now.status == "Discharging" then
-            battext:set_text('Battery: ' .. bat_now.perc .. '%')
-        elseif bat_now.status == "Charging" then
-            battext:set_text('Battery: ' .. bat_now.perc .. '%')
-        else
-        end
+        battext:set_text('Battery: ' .. bat_now.perc .. '%')
         batbar:set_value(bat_now.perc)
         batstat:set_text(bat_now.status)
     end
