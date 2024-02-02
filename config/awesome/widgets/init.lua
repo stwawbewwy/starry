@@ -5,12 +5,22 @@ local hotkeys_popup = require'awful.hotkeys_popup'
 local beautiful = require'beautiful'
 local wibox = require'wibox'
 local gears = require'gears'
+local lain = require'lain'
 local modules = require'modules'
 
 local apps = require'config.apps'
 local mod = require'bindings.mod'
 
-local textclock = wibox.widget.textclock()
+local textclock = wibox.widget.textclock('%H:%M', 1)
+
+local mycal = lain.widget.cal{
+    attach_to = {textclock},
+    notification_preset = {
+        font = "Comic Mono 10",
+        fg = beautiful.fg_focus,
+        bg = beautiful.bg_focus,
+    }
+}
 
 function _M.create_promptbox() return awful.widget.prompt() end
 

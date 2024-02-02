@@ -4,12 +4,14 @@ local awful = require'awful'
 local lain = require'lain'
 local bling = require'bling'
 local l = awful.layout.suit
-local b = bling.layout
+local j = lain.layout
+
+j.cascade.offset_x = 20
+j.cascade.offset_y = 20
 
 _M.layouts = {
-    l.spiral,
-    l.floating,
-    l.max,
+    l.spiral.dwindle,
+    j.cascade,
 }
 
 _M.tags = {
@@ -22,11 +24,11 @@ _M.tags = {
 }
 
 _M.defaultlayouts = {
-    l.max, -- 1
-    l.max, -- 2
-    l.spiral, -- 3
-    l.spiral, -- 4
-    l.floating, -- 5
+    j.cascade, -- 1
+    j.cascade, -- 2
+    l.spiral.dwindle, -- 3
+    l.spiral.dwindle, -- 4
+    l.spiral.dwindle, -- 5
     l.floating, -- 6
 }
 

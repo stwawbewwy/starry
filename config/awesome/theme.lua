@@ -8,7 +8,7 @@ local gears = require("gears")
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 local lain = require'lain'
-local lain_icons = os.getenv('HOME') .. "/.config/awesome/lain/icons/layout/default/"
+local lain_icons = os.getenv('HOME') .. "/.config/awesome/lain/icons/layout/zenburn/"
 
 local theme = {}
 
@@ -90,7 +90,7 @@ theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 theme.layout_centerwork = lain_icons .. 'centerwork.png'
 theme.layout_termfair = lain_icons .. 'termfair.png'
-theme.layout_cascade = lain_icons .. 'cascade.png'
+theme.layout_cascade =  lain_icons .. 'cascade.png'
 theme.layout_cascadetile = lain_icons .. 'cascadetile.png'
 theme.layout_centerfair = lain_icons .. 'centerfair.png'
 
