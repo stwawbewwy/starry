@@ -450,4 +450,7 @@ awful.keyboard.append_global_keybindings{
     },
 }
 
-return button
+return {
+    button = button,
+    popup = popup
+}

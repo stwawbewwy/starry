@@ -11,7 +11,7 @@ local modules = require'modules'
 local apps = require'config.apps'
 local mod = require'bindings.mod'
 
-local textclock = wibox.widget.textclock('%H:%M', 1)
+local textclock = wibox.widget.textclock('%R %a %d/%m/%Y', 1)
 
 local mycal = lain.widget.cal{
     attach_to = {textclock},
@@ -170,6 +170,7 @@ function _M.create_wibox(s)
                 spacing = 10,
                 wibox.container.margin(s.layoutbox, 10, 0),
                 s.taglist,
+                -- modules.test,
             },
             -- middle widgets
             {
@@ -183,7 +184,7 @@ function _M.create_wibox(s)
                 textclock,
                 modules.hourai,
                 modules.shanghai,
-                wibox.container.margin(modules.aliceyay, 0, 10),
+                wibox.container.margin(modules.aliceyay.button, 0, 10),
             }
         }
     }

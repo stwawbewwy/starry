@@ -1,30 +1,41 @@
 local awful = require'awful'
 local wibox = require'wibox'
 local gears = require'gears'
-local bling = require'bling'
+local beautiful = require'beautiful'
 
+local mod = require'bindings.mod'
 local apps = require'config.apps'
 local home = apps.home
 
-local args = {
-    apps_per_column = 1,
-    sort_alphabetically = false,
-    reverse_sort_alphabetically = true,
+local sleeping1 = home .. 'modules/hourai/awake1.png'
+local sleeping2 = home .. 'modules/hourai/awake2.png'
+
+local anim = {sleeping1, sleeping2}
+
+local eepy = wibox.widget{
+    widget = wibox.widget.imagebox,
+    forced_height = 32,
+    forced_width = 32,
+    valign = 'center',
 }
 
-local text = wibox.widget{
-    widget = wibox.widget.textbox,
-    halign = true,
-    text = 'hi',
-}
+local current_frame = 1
 
-local app_launcher = bling.widget.app_launcher(args)
+local function timer()
+    return gears.timer{
+        timeout = 1,
+        call_now = true,
+        autostart = true,
+        callback = function()
+            if current_frame <= 1 then
+                eepy:set_image(anim[current_frame])
+                current_frame = current_frame + 1
+            else
+                current_frame = 1
+                eepy:set_image(anim[2])
+            end
+        end
+    }
+end
 
-text:connect_signal('button::press', function(_, _, _, button)
-    if button == 1 then
-        app_launcher:toggle()
-    else
-    end
-end)
-
-return text
+return eepy

@@ -10,7 +10,7 @@ j.cascade.offset_x = 20
 j.cascade.offset_y = 20
 
 _M.layouts = {
-    l.spiral.dwindle,
+    l.tile,
     j.cascade,
 }
 
@@ -26,9 +26,9 @@ _M.tags = {
 _M.defaultlayouts = {
     j.cascade, -- 1
     j.cascade, -- 2
-    l.spiral.dwindle, -- 3
-    l.spiral.dwindle, -- 4
-    l.spiral.dwindle, -- 5
+    l.tile, -- 3
+    l.tile, -- 4
+    l.tile, -- 5
     l.floating, -- 6
 }
 

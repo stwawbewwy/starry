@@ -32,7 +32,7 @@ The cutes of this rice:
 - Cat
     - It wakes up or sleep depending on the time of the day
     - Wakes up at its sleeping state when mouse hovers over it
-    - It's a cat!
+    - It's a cat with animations for sleeping and being awake!
 - Cake battery indicator
     - Indicates battery using amount of cakes
 - Bell

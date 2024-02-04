@@ -13,6 +13,10 @@ local sleeping2 = home .. 'modules/hourai/sleeping2.png'
 local awake1 = home .. 'modules/hourai/awake1.png'
 local awake2 = home .. 'modules/hourai/awake2.png'
 
+local awake_anim = {awake1, awake2}
+local sleeping_anim = {sleeping1, sleeping2}
+local current_frame = 1
+
 local eepy = wibox.widget{
     widget = wibox.widget.imagebox,
     forced_height = 32,
@@ -20,34 +24,56 @@ local eepy = wibox.widget{
     valign = 'center',
 }
 
-local function modecheck()
+local function timecheck()
     local currenttime = tonumber(os.date("%H"))
+    local time
     if currenttime >= 22 or currenttime <= 5 then
-        return true
+        local time = "sleep"
+        return time
     else
-        return false
+        local time = "awake"
+        return time
     end
 end
+
+local function animation(mode)
+    return gears.timer{
+        timeout = 1,
+        callback = function()
+            if current_frame < 2 then
+                eepy:set_image(mode[current_frame])
+                current_frame = current_frame + 1
+            else
+                current_frame = 1
+                eepy:set_image(mode[2])
+            end
+        end
+    }
+end
+
+local sleepmode = animation(sleeping_anim)
+local awakemode = animation(awake_anim)
 
 local timer = gears.timer{
     timeout = 60,
     call_now = true,
     autostart = true,
     callback = function()
-        if modecheck() == true then
-            if eepy.image ~= sleeping2 then
-                eepy:set_image(sleeping2)
-                eepy:connect_signal('mouse::enter', function()
-                    eepy:set_image(awake1)
-                    eepy:connect_signal('mouse::leave', function()
-                        eepy:set_image(sleeping2)
-                    end)
+        if timecheck() == "sleep" then
+            awakemode:stop()
+            sleepmode:again()
+            eepy:connect_signal('mouse::enter', function()
+                sleepmode:stop()
+                awakemode:again()
+                eepy:connect_signal('mouse::leave', function()
+                    awakemode:stop()
+                    sleepmode:again()
                 end)
-            end
+            end)
+        elseif timecheck() == "awake" then
+            sleepmode:stop()
+            awakemode:again()
         else
-            if eepy.image ~= awake1 then
-                eepy:set_image(awake1)
-            end
         end
         collectgarbage()
     end
