@@ -68,6 +68,10 @@ local timer = gears.timer{
                 eepy:connect_signal('mouse::leave', function()
                     awakemode:stop()
                     sleepmode:again()
+                    eepy:disconnect_signal('mouse::enter', function()
+                        sleepmode:stop()
+                        awakemode:again()
+                    end)
                 end)
             end)
         elseif timecheck() == "awake" then
