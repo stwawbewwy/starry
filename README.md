@@ -45,3 +45,5 @@ The cutes of this rice:
 External dependencies:
 - **[playerctl](https://github.com/altdesktop/playerctl.git)**
 - **[brightnessctl](https://github.com/Hummer12007/brightnessctl.git)**
+- **[Comic Mono Font](https://dtinth.github.io/comic-mono-font)**
+- **[Pinyon Script Font](https://github.com/SorkinType/Pinyon.git)**
