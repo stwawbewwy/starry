@@ -27,7 +27,7 @@ local eepy = wibox.widget{
 local function timecheck()
     local currenttime = tonumber(os.date("%H"))
     local time
-    if currenttime >= 22 or currenttime <= 19 then
+    if currenttime >= 22 or currenttime <= 5 then
         local time = "sleep"
         return time
     else
