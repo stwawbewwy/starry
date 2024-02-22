@@ -20,6 +20,8 @@ theme.bg_urgent     = "#65bbac"
 theme.bg_minimize   = "#65bbac"
 theme.bg_systray    = theme.bg_normal
 
+theme.hotkeys_modifiers_fg = "#5f83af"
+
 theme.fg_normal     = "#ffffff"
 theme.fg_focus      = "#f2de58"
 theme.fg_urgent     = "#ff6961"
@@ -29,7 +31,7 @@ theme.taglist_squares_sel = gfs.get_configuration_dir() .. "themes/renkohat.png"
 theme.taglist_squares_unsel = gfs.get_configuration_dir() .. "themes/warmcoffeecup.png"
 theme.taglist_squares_sel_empty = gfs.get_configuration_dir() .. "themes/renkohat.png"
 theme.taglist_squares_unsel_empty = gfs.get_configuration_dir() .. "themes/coffeecup.png"
-theme.taglist_squares_resize = "true"
+theme.taglist_squares_resize = "false"
 
 theme.useless_gap         = dpi(10)
 theme.border_width        = dpi(1)

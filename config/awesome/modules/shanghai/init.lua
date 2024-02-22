@@ -27,6 +27,7 @@ end
 
 local batupd = lain.widget.bat{
     timeout = 10,
+    notify = 'off',
     settings = function()
         if (not bat_now.status) or bat_now.status == "N/A" or type(bat_now.perc) ~= "number" then return end
 
@@ -43,7 +44,6 @@ local batupd = lain.widget.bat{
         else
             baticon:set_image()
         end
-        collectgarbage()
     end
 }
 

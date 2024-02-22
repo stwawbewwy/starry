@@ -19,11 +19,11 @@ require'signals'
 
 collectgarbage("setpause", 110)
 collectgarbage("setstepmul", 1000)
-gears.timer({
+gears.timer{
     timeout = 5,
     autostart = true,
     call_now = true,
     callback = function()
         collectgarbage("collect")
     end,
-})
+}

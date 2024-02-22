@@ -96,6 +96,20 @@ local batupd = lain.widget.bat{
         battext:set_text('Battery: ' .. bat_now.perc .. '%')
         batbar:set_value(bat_now.perc)
         batstat:set_text(bat_now.status)
+        bat_notification_critical_preset = {
+            title = "Critical battery",
+            text = "Please shut down",
+            timeout = 10,
+            fg = beautiful.fg_normal,
+            bg = beautiful.fg_urgent,
+        }
+        bat_notification_low_preset = {
+            title = "Battery low",
+            text = "Please charge",
+            timeout = 10,
+            fg = beautiful.fg_normal,
+            bg = beautiful.bg_normal,
+        }
     end
 }
 
@@ -188,7 +202,7 @@ local function brightnessupdate()
         stdout = function(line)
             brightnessbar:set_value(tonumber(line))
             brightnesstext:set_text('Brightness: ' .. math.floor(tonumber(line)/255*100) .. '%')
-            naughty.notify({title = 'Brightness', text = brightnesstext.text})
+            naughty.notify({title = 'Brightness', text = brightnesstext.text, timeout = 1})
         end
     })
 end
@@ -276,7 +290,6 @@ local musictimer = gears.timer{
     callback = function()
         statuscheck()
         nowplaying()
-        collectgarbage()
     end
 }
 
@@ -284,7 +297,9 @@ musicplayer:connect_signal('button::press', function(_, _, _, button)
     if button == 1 then
         awful.spawn.with_shell('playerctl --player=cmus play-pause')
         statuscheck()
-        collectgarbage()
+    elseif button == 3 then
+        statuscheck()
+        nowplaying()
     end
 end)
 
@@ -443,7 +458,7 @@ end)
 awful.keyboard.append_global_keybindings{
     awful.key{
         modifiers = {mod.super},
-        key = 'o',
+        key = 'i',
         descripton = 'popup menu',
         group = 'popup',
         on_press = function() toggle(popup) end,

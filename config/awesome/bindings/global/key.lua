@@ -27,7 +27,7 @@ awful.keyboard.append_global_keybindings{
     },
     awful.key{
         modifiers   = {mod.super, mod.shift},
-        key         = 'Backspace',
+        key         = 'BackSpace',
         description = 'quit awesome',
         group       = 'awesome',
         on_press    = awesome.quit,

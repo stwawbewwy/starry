@@ -55,7 +55,11 @@ ruled.client.connect_signal('request::rules', function()
 
    ruled.client.append_rule{
        rule_any = {
-           class = {'PrismLauncher', 'steam'}
+           class = {
+               'PrismLauncher', 
+               'steam', 
+               'Minecraft'
+           }
        },
        properties = {screen = 1, tag = vars.tags[6]}
    }

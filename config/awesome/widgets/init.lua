@@ -13,14 +13,13 @@ local mod = require'bindings.mod'
 
 local textclock = wibox.widget.textclock('%R %a %d/%m/%Y', 1)
 
-local mycal = lain.widget.cal{
-    attach_to = {textclock},
-    notification_preset = {
-        font = "Comic Mono 10",
-        fg = beautiful.fg_focus,
-        bg = beautiful.bg_focus,
-    }
-}
+local cw = modules.yuwu({
+    placement = 'top_right'
+})
+
+textclock:connect_signal("button::press",function(_, _, _, button)
+    if button == 1 or button == 3 then cw.toggle() end
+end)
 
 function _M.create_promptbox() return awful.widget.prompt() end
 

@@ -27,7 +27,7 @@ local eepy = wibox.widget{
 local function timecheck()
     local currenttime = tonumber(os.date("%H"))
     local time
-    if currenttime >= 22 or currenttime <= 5 then
+    if currenttime >= 22 or currenttime <= 19 then
         local time = "sleep"
         return time
     else
@@ -54,34 +54,43 @@ end
 local sleepmode = animation(sleeping_anim)
 local awakemode = animation(awake_anim)
 
+local function triggersleep()
+    awakemode:stop()
+    sleepmode:again()
+end
+
+local function triggerawake()
+    sleepmode:stop()
+    awakemode:again()
+end
+
 local timer = gears.timer{
     timeout = 60,
     call_now = true,
     autostart = true,
     callback = function()
         if timecheck() == "sleep" then
-            awakemode:stop()
-            sleepmode:again()
-            eepy:connect_signal('mouse::enter', function()
-                sleepmode:stop()
-                awakemode:again()
-                eepy:connect_signal('mouse::leave', function()
-                    awakemode:stop()
-                    sleepmode:again()
-                    eepy:disconnect_signal('mouse::enter', function()
-                        sleepmode:stop()
-                        awakemode:again()
-                    end)
-                end)
-            end)
+            triggersleep()
         elseif timecheck() == "awake" then
-            sleepmode:stop()
-            awakemode:again()
+            triggerawake()
         else
         end
-        collectgarbage()
     end
 }
+
+eepy:connect_signal('mouse::enter', function()
+    if timecheck() == "sleep" then
+        triggerawake()
+    else
+    end
+end)
+
+eepy:connect_signal('mouse::leave', function()
+    if timecheck() == "sleep" then
+        triggersleep()
+    else
+    end
+end)
 
 local term_scratch = bling.module.scratchpad{
     command = "wezterm start --class spad",
@@ -89,7 +98,7 @@ local term_scratch = bling.module.scratchpad{
     sticky = true,
     autoclose = true,
     floating = true,
-    geometry = {x=620, y=52, height = 720, width=1280},
+    geometry = {x=618, y=52, height = 720, width=1280},
     reapply = true,
     dont_focus_before_close = true,
 }
@@ -97,8 +106,13 @@ local term_scratch = bling.module.scratchpad{
 local args = {
     terminal = 'wezterm',
     favorites = {'librewolf', 'wezterm'},
+    search_commands = true,
     skip_empty_icons = true,
     placement = awful.placement.right,
+    reset_on_hide = true,
+
+    wrap_page_scrolling = false,
+    wrap_app_scrolling = false,
 
     apps_per_row = 5,
     apps_per_column = 2,
@@ -150,9 +164,9 @@ awful.keyboard.append_global_keybindings{
 }
 
 eepy:connect_signal('button::press', function(_, _, _, button)
-    if button == 3 then
+    if button == 1 then
         term_scratch:toggle()
-    elseif button == 1 then
+    elseif button == 3 then
         app_launcher:toggle()
     else
     end
