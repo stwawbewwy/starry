@@ -106,7 +106,7 @@ function _M.create_tasklist(s)
         --]]
         layout = {
             spacing = 10,
-            forced_width = 640,
+            forced_width = 1000,
             spacing_widget = {
                 {
                     forced_width = 5,

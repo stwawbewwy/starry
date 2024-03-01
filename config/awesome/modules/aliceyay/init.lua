@@ -99,14 +99,14 @@ local batupd = lain.widget.bat{
         bat_notification_critical_preset = {
             title = "Critical battery",
             text = "Please shut down",
-            timeout = 10,
+            timeout = 5,
             fg = beautiful.fg_normal,
             bg = beautiful.fg_urgent,
         }
         bat_notification_low_preset = {
             title = "Battery low",
             text = "Please charge",
-            timeout = 10,
+            timeout = 5,
             fg = beautiful.fg_normal,
             bg = beautiful.bg_normal,
         }
